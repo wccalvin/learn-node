@@ -1,2 +1,3 @@
-# learn-node
+# NodeJS
+
 Notes and projects using nodejs
