@@ -17,8 +17,8 @@ https.get(apiUrl, (res) => {
   });
 
   res.on("end", () => {
-    console.log(d);
-    console.log(typeof d);
+    const profile = JSON.parse(d);
+    console.dir(profile);
   });
 });
 // parse the data
