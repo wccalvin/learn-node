@@ -8,20 +8,21 @@ const printMessage = (userName, badgeCount, points) =>
   `${userName} has ${badgeCount} total badge(s) and ${points} points in JavaScript.`;
 // connect to API url
 https.get(apiUrl, (res) => {
-  console.log(`status: ${res.statusCode}`);
-  // console.log("headers:");
   // console.dir(res.headers);
   let d = "";
+  // data event
   res.on("data", (data) => {
     d += data;
   });
 
+  // end data event
   res.on("end", () => {
     const profile = JSON.parse(d);
-    console.dir(profile);
+    const badges = profile.badges.length;
+    const jsPoints = profile.points.JavaScript;
+    const msg = printMessage(userName, badges, jsPoints);
+    console.log(msg);
   });
 });
 // parse the data
 // print the data
-
-console.log(printMessage(userName, 10, 500));
