@@ -6,23 +6,25 @@ const printMessage = (userName, badgeCount, points) =>
 // connect to API url
 const getProfileInfo = (userName) => {
   const apiUrl = `https://teamtreehouse.com/${userName}.json`;
-  https.get(apiUrl, (res) => {
-    // console.dir(res.headers);
-    let d = "";
-    // data event
-    res.on("data", (data) => {
-      d += data;
-    });
+  https
+    .get(apiUrl, (res) => {
+      // console.dir(res.headers);
+      let d = "";
+      // data event
+      res.on("data", (data) => {
+        d += data;
+      });
 
-    // end data event
-    res.on("end", () => {
-      const profile = JSON.parse(d);
-      const badges = profile.badges.length;
-      const jsPoints = profile.points.JavaScript;
-      const msg = printMessage(userName, badges, jsPoints);
-      console.log(msg);
-    });
-  });
+      // end data event
+      res.on("end", () => {
+        const profile = JSON.parse(d);
+        const badges = profile.badges.length;
+        const jsPoints = profile.points.JavaScript;
+        const msg = printMessage(userName, badges, jsPoints);
+        console.log(msg);
+      });
+    })
+    .on("error", (e) => console.log(e));
 };
 
 const users = process.argv.slice(2);
