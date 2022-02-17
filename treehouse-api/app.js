@@ -25,5 +25,5 @@ const getProfileInfo = (userName) => {
   });
 };
 
-const users = ["chalkers", "cw10"];
+const users = process.argv.slice(2);
 users.forEach(getProfileInfo);
