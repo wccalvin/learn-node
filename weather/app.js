@@ -3,6 +3,8 @@ use the https://openweathermap.org/ api to get the current weather for the given
 location
 */
 
+const arg = require("./arg");
+
 const location = process.argv.slice(2);
 if (location.length === 0) {
   const scriptName = process.argv[1];
@@ -11,17 +13,6 @@ if (location.length === 0) {
   console.log(`Example: node ${scriptName} 10001`);
 }
 
-const processLocation = (location) => {
-  let processedLocation = [];
-  // join the given string
-  location = location.join(" ");
-  location = location.split(",");
-  location.forEach((loc) => {
-    const location = loc.trim();
-    processedLocation.push(location.toLowerCase());
-  });
-  return processedLocation.join(",");
-};
-
-const givenLoction = processLocation(location);
-console.log(givenLoction);
+const processLocation = arg.processLocation;
+const givenLocation = processLocation(location);
+console.log(givenLocation);
