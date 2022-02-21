@@ -16,4 +16,4 @@ if (location.length === 0) {
 
 const processLocation = arg.processLocation;
 const givenLocation = processLocation(location);
-const weatherData = weather.get(givenLocation);
+weather.get(givenLocation);

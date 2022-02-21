@@ -5,7 +5,7 @@ const api = require("./api.json");
 const getWeatherData = (location) => {
   const apiKey = api.key;
   const weatherUrl = "https://api.openweathermap.org/data/2.5/weather";
-  const apiUrl = `${weatherUrl}?q=${location}&APPID=${apiKey}`;
+  const apiUrl = `${weatherUrl}?q=${location}&units=imperial&APPID=${apiKey}`;
   try {
     req = https.get(apiUrl, (res) => {
       const status = res.statusCode;
@@ -15,7 +15,18 @@ const getWeatherData = (location) => {
           data += d;
         });
         res.on("end", () => {
-          console.dir(data);
+          try {
+            const weatherData = JSON.parse(data);
+            console.dir(weatherData);
+            const description = weatherData.weather[0].description;
+            const temp = weatherData.main.temp;
+            const feelsLike = weatherData.main.feels_like;
+            const minTemp = weatherData.main.temp_min;
+            const maxTemp = weatherData.main.temp_max;
+            const humidity = weatherData.main.humidity;
+          } catch (e) {
+            console.error(e.message);
+          }
         });
       } else {
         const statusMessage = http.STATUS_CODES[status];
