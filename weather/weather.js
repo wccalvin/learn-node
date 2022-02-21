@@ -1,4 +1,5 @@
 const https = require("https");
+const http = require("http");
 const api = require("./api.json");
 
 const getWeatherData = (location) => {
@@ -14,8 +15,15 @@ const getWeatherData = (location) => {
           data += d;
         });
         res.on("end", () => {
-          console.log(data);
+          console.dir(data);
         });
+      } else {
+        const statusMessage = http.STATUS_CODES[status];
+        const statusError = new Error(
+          "An error occurred when retrieving weather data for " +
+            `${location}: ${status} (${statusMessage})`
+        );
+        console.error(statusError.message);
       }
     });
     req.on("error", (e) => {
