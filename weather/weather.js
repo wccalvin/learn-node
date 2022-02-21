@@ -17,13 +17,16 @@ const getWeatherData = (location) => {
         res.on("end", () => {
           try {
             const weatherData = JSON.parse(data);
-            console.dir(weatherData);
-            const description = weatherData.weather[0].description;
+            // console.dir(weatherData);
+            const summary = weatherData.weather[0].main;
             const temp = weatherData.main.temp;
             const feelsLike = weatherData.main.feels_like;
             const minTemp = weatherData.main.temp_min;
             const maxTemp = weatherData.main.temp_max;
             const humidity = weatherData.main.humidity;
+            console.log("--------");
+            console.log(`Summary: ${summary}`);
+            console.log(`Current Temperature: ${temp} F`);
           } catch (e) {
             console.error(e.message);
           }
